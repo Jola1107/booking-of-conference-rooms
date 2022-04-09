@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+      <title>Booking of conference rooms</title>
+</head>
+
+<body bgcolor="#a9a9a9">
+<form action="" method="POST">
+    {% csrf_token %}
+
+      <div class="room">
+        <a href="ShowRooms.html"><button type="button">List of all rooms</button></a>
+      <br>
+        <br>
+        <br>
+        <br>
+        <a href="room/new/"><button type="button">Add room</button></a>
+      </div>
+  {% if error %}
+    {{error}}
+  {% endif %}
+</form>
+  <footer>Author: Jolanta Wiśniewska</footer>
+</body>
+
+</html>

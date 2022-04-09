@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking of conference rooms</title>
+    <style>
+        .room {
+            background-color: palevioletred;
+            color: white;
+            border: 2px solid black;
+            margin: auto;
+            padding: 100px;
+            width:200px;
+            height:250px
+}
+    </style>
+</head>
+<body>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="room">
+    <label >Room name: </label>
+        <input type="text" name="name">
+    <br>
+    <br>
+    <label >Number of seats: </label>
+        <input type="number" name="seats">
+    <br>
+    <br>
+    <label>Projector: </label><br>
+        <br>
+        <label >Yes</label>
+        <input type="checkbox" name="projector" value="Yes">
+
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    <input type="submit" value="Add a room"><br>
+        {% if error %}
+            {{error}}
+        {% endif %}
+    </div>
+</form>
+
+</body>
+</html>
