@@ -20,7 +20,7 @@ class AddRoomView(View):
         seats = request.POST.get('seats')
         seats_int = int(seats) if seats else 0
         projector = request.POST.get('projector')
-        print(projector)
+        #print(projector)
         if projector == "Yes":
             projector = True
         else:
@@ -43,4 +43,4 @@ class AddRoomView(View):
 
 class ShowAllView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'base.html')
+        return render(request, 'ShowAll.html')

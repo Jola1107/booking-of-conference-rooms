@@ -4,27 +4,49 @@
 
 <head>
   <meta charset="UTF-8">
+<style>
+    .footer {
+		position:absolute;
+        left: 0;
+		bottom:0;
+		width:100%;
+		height:100px;
+		background:gray;
+        text-align: center;
+	}
+    .room {
+        position:center;
+        left: 0;
+		bottom:0;
+		width:100%;
+		height:100px;
+		background:gray;
+        text-align: center;
+    }
+</style>
 
       <title>Booking of conference rooms</title>
 </head>
 
 <body bgcolor="#a9a9a9">
-<form action="" method="POST">
-    {% csrf_token %}
-
-      <div class="room">
+<!--<form action="" method="POST">-->
+<!--    {% csrf_token %}-->
+<div class="room">
+<h1>Room navigation system</h1>
         <a href="ShowRooms.html"><button type="button">List of all rooms</button></a>
-      <br>
-        <br>
-        <br>
-        <br>
         <a href="room/new/"><button type="button">Add room</button></a>
-      </div>
+    </div>
   {% if error %}
-    {{error}}
+    <label position="center" >{{error}}</label>
   {% endif %}
-</form>
-  <footer>Author: Jolanta Wiśniewska</footer>
+<!--</form>-->
+<footer class="footer">
+  <span class="text">Jolanta Wiśniewska</span>
+</footer>
+
 </body>
 
 </html>
+
+
+
