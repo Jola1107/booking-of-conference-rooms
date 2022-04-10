@@ -50,15 +50,16 @@
     <br>
     <br>
     <div class="add">
-    <label >Room name: </label>
+<!--        {% if name %}-->
+    <label >Rename: {{room.name}}</label>
         <input type="text" name="name">
     <br>
     <br>
-    <label >Number of seats: </label>
+    <label >Number of seats: {{room.seats}}</label>
         <input type="number" name="seats">
     <br>
     <br>
-    <label>Projector: </label>
+    <label>Projector: {{room.projector}}</label>
         <label >Yes</label>
         <input type="checkbox" name="projector" value="Yes">
     <br>

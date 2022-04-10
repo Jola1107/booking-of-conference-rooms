@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Rooms
 from django.views import View
 from django.http import HttpResponse
@@ -38,9 +38,24 @@ class AddRoomView(View):
                 seats=seats,
                 projector=projector
             )
-            return render(request, 'base.html', context={'error':'Room added'})
+            return redirect('add-room')
 
 
 class ShowAllView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'ShowAll.html')
+        rooms=Rooms.objects.all()
+        return render(request, 'ShowAll.html', context={'rooms':rooms})
+
+
+
+class DeleteView(View):
+    def get(self, request, room_id):
+        r = Rooms.objects.get(pk=room_id)
+        r.delete()
+        return redirect('show-all')
+
+
+class ModifyView(View):
+    def get(self, request, room_id):
+        r = Rooms.objects.get(id=room_id)
+        return render(request, 'Modify.html')
