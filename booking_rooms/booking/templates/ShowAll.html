@@ -19,24 +19,35 @@
         left: 0;
 		bottom:0;
 		width:100%;
-		height:100px;
+		height:50px;
 		background:gray;
         text-align: center;
     }
     td, th { border: 1px solid black; }
+
 </style>
 
-      <title>Booking of conference rooms</title>
-</head>
 
+</head>
+<title>Booking of conference rooms</title>
 <body bgcolor="#a9a9a9">
+<div class="room">
+<h1>Room navigation system</h1>
+        <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
+        <a href="/room/new/"><button type="button">Add room</button></a>
+      </div>
+<!--  {% if error %}-->
+<!--    {{error}}-->
+<!--  {% endif %}-->
 <form action="" method="POST">
     {% csrf_token %}
 <div class="room">
-<h1>Room navigation system</h1>
-    <br>
-    <br>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <table>
    <thead>
       <tr> <th> Number <th> Name of room <th>Number of seats <th> Room availability<th>
