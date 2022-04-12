@@ -59,7 +59,7 @@ class ModifyView(View):
     def get(self, request, id):
         room = Rooms.objects.get(id=id)
 
-        return render(request, 'Modify.html')
+        return render(request, 'Modify.html', context={'room':room})
 
     def post(self, request, id):
         room = Rooms.objects.get(id=id)
