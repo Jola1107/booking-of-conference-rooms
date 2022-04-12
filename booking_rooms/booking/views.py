@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Rooms
+from .models import Rooms, Reserve
 from django.views import View
 from django.http import HttpResponse
 
@@ -86,3 +86,23 @@ class ModifyView(View):
             room.save()
 
             return redirect('show-all')
+
+
+class ReserveView(View):
+    def get(self, request, id):
+        return render(request, 'Reserve.html')
+
+    def post(self, request, id):
+        room = Rooms.objects.get(id=id)
+        date = request.POST.get('date')
+        comment = request.POST.get('comment')
+
+        if date:
+            return render(request, 'Reserve.html',
+                          context={'error':'The room is reserved for the selected day. Please choose another.'})
+        if date in date-1:
+            return render(request, 'Reserve.html',
+                          context={'error':'Invalid date. That day is over.'})
+        else:
+            Reserve.objects.create(date=date, comment=comment)
+            return redirect('reserve-room')
