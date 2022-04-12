@@ -38,7 +38,7 @@
 <body bgcolor="#a9a9a9">
 <div class="room">
 <h1>Room navigation system</h1>
-        <a href="show-rooms/"><button type="button">List of all rooms</button></a>
+        <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
         <a href="room/new/"><button type="button">Add room</button></a>
       </div>
 <!--  {% if error %}-->
@@ -50,24 +50,29 @@
     <br>
     <br>
     <div class="add">
-<!--        {% if name %}-->
-    <label >Rename: {{room.name}}</label>
-        <input type="text" name="name">
+
+    <label >New name: </label>
+        <input type="text" name="name" value="{{ room.name }}">
+
     <br>
     <br>
-    <label >Number of seats: {{room.seats}}</label>
-        <input type="number" name="seats">
+
+    <label >Number of seats: </label>
+        <input type="number" name="seats" value="{{ room.seats }}">
+
     <br>
     <br>
-    <label>Projector: {{room.projector}}</label>
+    <label>Projector: </label>
         <label >Yes</label>
         <input type="checkbox" name="projector" value="Yes">
+
     <br>
         <br>
         <br>
         <br>
         <br>
-    <input type="submit" value="Add a room"><br>
+    <input type="submit" value=Modify><br>
+
         <br>
         {% if error %}
             <label position="center" >{{error}}</label>

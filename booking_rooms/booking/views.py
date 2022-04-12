@@ -20,7 +20,7 @@ class AddRoomView(View):
         seats = request.POST.get('seats')
         seats_int = int(seats) if seats else 0
         projector = request.POST.get('projector')
-        #print(projector)
+
         if projector == "Yes":
             projector = True
         else:
@@ -38,7 +38,7 @@ class AddRoomView(View):
                 seats=seats,
                 projector=projector
             )
-            return redirect('add-room')
+            return redirect('show-all')
 
 
 class ShowAllView(View):
@@ -56,6 +56,33 @@ class DeleteView(View):
 
 
 class ModifyView(View):
-    def get(self, request, room_id):
-        r = Rooms.objects.get(id=room_id)
+    def get(self, request, id):
+        room = Rooms.objects.get(id=id)
+
         return render(request, 'Modify.html')
+
+    def post(self, request, id):
+        room = Rooms.objects.get(id=id)
+        name = request.POST.get('name')
+        seats = request.POST.get('seats')
+        seats_int = int(seats) if seats else 0
+        projector = request.POST.get('projector')
+
+        if projector == "Yes":
+            projector = True
+        else:
+            projector = False
+
+        if not name:
+            return render(request, 'Modify.html', context={'error':'Enter the name of the room'})
+        if Rooms.objects.filter(name=name).exists():
+            return render(request, 'Modify.html', context={'error':'That room exist'})
+        if seats_int <= 0:
+            return render(request, 'Modify.html', context={'error':'Enter a number greater than 0'})
+        else:
+            room.name = name
+            room.seats=seats
+            room.projector=projector
+            room.save()
+
+            return redirect('show-all')
