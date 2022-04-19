@@ -56,7 +56,11 @@
         {% for room in rooms %}
         <tr> <th> {{room.id}}</th><td><a href="/show-room/{{room.id}}/"><button type="button">{{room.name}}</button></a></td>
             <td> {{room.seats}} </td>
-            <td> {{reserve.date|date:"Y-M-d"}}</td>
+            {% if room.reserve %}
+            <td style="color: red">Reserved</td>
+            {% else %}
+            <td style="color: green">Free</td>
+            {% endif %}
             {% if room.projector %}
             <td style="color: green">Yes</td>
             {% else %}
