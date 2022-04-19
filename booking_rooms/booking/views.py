@@ -1,7 +1,10 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from .models import Rooms, Reserve
 from django.views import View
 from django.http import HttpResponse
+from datetime import datetime, date
 
 class RoomView(View):
     def get(self, request, *args, **kwargs):
@@ -50,7 +53,7 @@ class ShowAllView(View):
 
 class DeleteView(View):
     def get(self, request, room_id):
-        r = Rooms.objects.get(pk=room_id)
+        r = Rooms.objects.get(id=room_id)
         r.delete()
         return redirect('show-all')
 
@@ -58,8 +61,11 @@ class DeleteView(View):
 class ModifyView(View):
     def get(self, request, id):
         room = Rooms.objects.get(id=id)
+        context ={'name': room.name,
+                  'seats': room.seats,
+                  'projector': room.projector}
 
-        return render(request, 'Modify.html', context={'room':room})
+        return render(request, 'Modify.html', context)
 
     def post(self, request, id):
         room = Rooms.objects.get(id=id)
@@ -90,19 +96,28 @@ class ModifyView(View):
 
 class ReserveView(View):
     def get(self, request, id):
-        return render(request, 'Reserve.html')
+        room = Rooms.objects.get(id=id)
+        return render(request, 'Reserve.html', context={'room': room})
 
     def post(self, request, id):
         room = Rooms.objects.get(id=id)
         date = request.POST.get('date')
         comment = request.POST.get('comment')
 
-        if date:
+        if Reserve.objects.filter(date=date, id=id):
             return render(request, 'Reserve.html',
                           context={'error':'The room is reserved for the selected day. Please choose another.'})
-        if date in date-1:
+        if date < str(datetime.today()):
             return render(request, 'Reserve.html',
                           context={'error':'Invalid date. That day is over.'})
         else:
-            Reserve.objects.create(date=date, comment=comment)
-            return redirect('reserve-room')
+            Reserve.objects.create(id_reserve=room, date=date, comment=comment)
+            return redirect('show-all')
+
+
+class ShowRoomView(View):
+    def get(self, request, id):
+        room = Rooms.objects.get(id=id)
+        reservations = room.reserve_set.filter(date__gte=str(date.today())).order_by('date')
+        return render(request, 'ShowRoom.html', context={'room': room, 'reservations': reservations})
+

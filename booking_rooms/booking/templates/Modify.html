@@ -53,17 +53,17 @@
     <div class="add">
 
     <label >Edit name {{ room.name }} </label>
-        <input type="text" name="name">
+        <input type="text" name="name" value="{{name}}">
 
     <br>
     <br>
 
     <label >Number of seats: </label>
-        <input type="number" name="seats">
+        <input type="number" name="seats" value="{{seats}}">
 
     <br>
     <br>
-    <label>Projector: </label>
+    <label>Projector: {{room.projector}}</label>
         <label >Yes</label>
         <input type="checkbox" name="projector" value="Yes">
 

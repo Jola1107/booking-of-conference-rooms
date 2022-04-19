@@ -50,27 +50,33 @@
     <br>
     <table>
    <thead>
-      <tr> <th> Number <th> Name of room <th>Number of seats <th> Room availability<th>
+      <tr> <th> Number <th> Name of room <th>Number of seats <th>
       Projector availability<th> Edit <th> Delete <th> Reserve</thead>
         <tbody>
-        {% for room in rooms %}
-        <tr> <th> {{room.id}}</th><td><a href="/show-room/{{room.id}}/"><button type="button">{{room.name}}</button></a></td>
+
+        <tr> <th> {{room.id}}</th><td>{{room.name}}</td>
             <td> {{room.seats}} </td>
-            <td> {{reserve.date|date:"Y-M-d"}}</td>
+
             {% if room.projector %}
             <td style="color: green">Yes</td>
             {% else %}
             <td style="color: red">No</td>
             {% endif %}
         <td><a href="/modify-room/{{room.id}}/"><button type="button">Edit</button></a></td>
-        <td><a href="delete-room/{{room.id}}/"><button type="button">Delete</button></a></td>
+        <td><a href="/delete-room/{{room.id}}/"><button type="button">Delete</button></a></td>
         <td><a href="/reserve-room/{{room.id}}/"><button type="button">Reserve</button></a></td>
-        </tr>
-        {% empty %}
-        <tr><td>No rooms available</td></tr>
-        {% endfor %}
+
       </tbody>
 </table>
+    <br>
+    <br>
+    <h2> Reservations: </h2>
+    <ul>
+        {% for reserve in reservations %}
+        <li>Date of reservation: {{reserve.date}}</li>
+            <lu>Comment: {{reserve.comment}}</lu>
+        {% endfor %}
+    </ul>
 
   {% if error %}
     <label position="center" >{{error}}</label>
