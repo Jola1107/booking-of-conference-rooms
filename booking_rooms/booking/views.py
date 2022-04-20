@@ -127,5 +127,33 @@ class ShowRoomView(View):
         return render(request, 'ShowRoom.html', context={'room': room, 'reservations': reservations})
 
 
+class SearchView(View):
+    def get(self, request):
+        name = request.GET.get('name')
+        seats = request.GET.get('seats')
+        seats_int = int(seats) if seats else 0
+        projector = request.POST.get('projector')
+
+        if projector == "Yes":
+            projector = True
+        else:
+            projector = False
+
+        rooms = Rooms.objects.all()
+        if projector:
+            rooms = Rooms.objects.filter(projector=projector)
+        if seats:
+            rooms = Rooms.objects.filter(seats__gte=seats_int)
+        if name:
+            rooms = Rooms.objects.filter(name=name)
+
+        for room in rooms:
+            reservation_date = [reserve.date for reserve in room.reserve_set.all()]
+            room.reserve = date.today() in reservation_date
+            context = {'rooms':rooms, 'date':date.today()}
+        return render(request, 'ShowAll.html', context)
+
+
+
 
 

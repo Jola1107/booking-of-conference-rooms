@@ -23,6 +23,11 @@
 		background:gray;
         text-align: center;
     }
+    .search {
+        position: center;
+        text-align: center;
+        bottom: auto;
+    }
 </style>
 
       <title>Booking of conference rooms</title>
@@ -35,7 +40,9 @@
 <h1>Room navigation system</h1>
         <a href="show-rooms/"><button type="button">List of all rooms</button></a>
         <a href="room/new/"><button type="button">Add room</button></a>
+
     </div>
+
   {% if error %}
     <label position="center" >{{error}}</label>
   {% endif %}

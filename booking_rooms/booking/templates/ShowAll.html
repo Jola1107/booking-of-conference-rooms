@@ -25,6 +25,12 @@
     }
     td, th { border: 1px solid black; }
 
+    .search {
+        position: center;
+        text-align: center;
+        bottom: auto;
+    }
+
 </style>
 
 
@@ -35,12 +41,11 @@
 <h1>Room navigation system</h1>
         <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
         <a href="/room/new/"><button type="button">Add room</button></a>
+
       </div>
-<!--  {% if error %}-->
-<!--    {{error}}-->
-<!--  {% endif %}-->
-<form action="" method="POST">
-    {% csrf_token %}
+
+<!--<form action="" method="POST">-->
+<!--    {% csrf_token %}-->
 <div class="room">
 
     <br>
@@ -75,7 +80,24 @@
         {% endfor %}
       </tbody>
 </table>
-
+<h1 style="text-align:center">Search room</h1>
+    <div class="search">
+     <form action="/search" method="GET">
+    {% csrf_token %}
+    <label >Name: </label>
+        <input type="text" name="name"><br>
+        <br>
+        <label >Seats: </label>
+        <input type="text" name="seats"><br>
+        <br>
+        <label>Projector: </label>
+        <label >Yes</label>
+        <input type="checkbox" name="projector" value="Yes">
+    <br>
+    <br>
+    <input type="submit" value="Search"><br>
+     </form>
+    </div>
   {% if error %}
     <label position="center" >{{error}}</label>
   {% endif %}
