@@ -52,7 +52,7 @@
 <h2 style="text-align:center">Room reservation: {{room.name}}</h2>
     <div class="add">
     <label >Comment: </label>
-        <textarea name="comment" cols="30" rows="5">Comment</textarea>
+        <textarea name="comment" cols="30" rows="5"></textarea>
     <br>
     <br>
     <label >Date </label>
@@ -66,6 +66,13 @@
         <br>
     <input type="submit" value="Reserve"><br>
         <br>
+            <h2> Reservations: </h2>
+    <ul>
+        {% for reserve in reservations %}
+        <li>Date of reservation: {{reserve.date}}</li>
+            <lu>Comment: {{reserve.comment}}</lu>
+        {% endfor %}
+    </ul>
         {% if error %}
             <label position="center" >{{error}}</label>
         {% endif %}

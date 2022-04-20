@@ -36,9 +36,7 @@
         <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
         <a href="/room/new/"><button type="button">Add room</button></a>
       </div>
-<!--  {% if error %}-->
-<!--    {{error}}-->
-<!--  {% endif %}-->
+
 <form action="" method="POST">
     {% csrf_token %}
 <div class="room">
@@ -81,7 +79,7 @@
   {% if error %}
     <label position="center" >{{error}}</label>
   {% endif %}
-<!--</form>-->
+
 <footer class="footer">
   <span class="text">Jolanta Wiśniewska</span>
 </footer>

@@ -46,7 +46,11 @@ class AddRoomView(View):
 
 class ShowAllView(View):
     def get(self, request, *args, **kwargs):
-        rooms=Rooms.objects.all()
+        rooms = Rooms.objects.all()
+        for room in rooms:
+            reservation_date = [reserve.date for reserve in room.reserve_set.all()]
+            room.reserve = date.today() in reservation_date
+            print(room.reserve)
         return render(request, 'ShowAll.html', context={'rooms':rooms})
 
 
@@ -87,8 +91,8 @@ class ModifyView(View):
             return render(request, 'Modify.html', context={'error':'Enter a number greater than 0'})
         else:
             room.name = name
-            room.seats=seats
-            room.projector=projector
+            room.seats = seats
+            room.projector = projector
             room.save()
 
             return redirect('show-all')
@@ -97,14 +101,15 @@ class ModifyView(View):
 class ReserveView(View):
     def get(self, request, id):
         room = Rooms.objects.get(id=id)
-        return render(request, 'Reserve.html', context={'room': room})
+        reservations = room.reserve_set.filter(date__gte=str(date.today())).order_by('date')
+        return render(request, 'Reserve.html', context={'room': room, 'reservations': reservations})
 
     def post(self, request, id):
         room = Rooms.objects.get(id=id)
         date = request.POST.get('date')
         comment = request.POST.get('comment')
 
-        if Reserve.objects.filter(date=date, id=id):
+        if Reserve.objects.filter(date=date):
             return render(request, 'Reserve.html',
                           context={'error':'The room is reserved for the selected day. Please choose another.'})
         if date < str(datetime.today()):
@@ -120,4 +125,7 @@ class ShowRoomView(View):
         room = Rooms.objects.get(id=id)
         reservations = room.reserve_set.filter(date__gte=str(date.today())).order_by('date')
         return render(request, 'ShowRoom.html', context={'room': room, 'reservations': reservations})
+
+
+
 
