@@ -29,8 +29,8 @@
 </head>
 
 <body bgcolor="#a9a9a9">
-<!--<form action="" method="POST">-->
-<!--    {% csrf_token %}-->
+<form action="" method="POST">
+    {% csrf_token %}
 <div class="room">
 <h1>Room navigation system</h1>
         <a href="show-rooms/"><button type="button">List of all rooms</button></a>
@@ -39,7 +39,7 @@
   {% if error %}
     <label position="center" >{{error}}</label>
   {% endif %}
-<!--</form>-->
+</form>
 <footer class="footer">
   <span class="text">Jolanta Wiśniewska</span>
 </footer>

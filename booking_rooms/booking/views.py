@@ -50,7 +50,7 @@ class ShowAllView(View):
         for room in rooms:
             reservation_date = [reserve.date for reserve in room.reserve_set.all()]
             room.reserve = date.today() in reservation_date
-            print(room.reserve)
+
         return render(request, 'ShowAll.html', context={'rooms':rooms})
 
 
