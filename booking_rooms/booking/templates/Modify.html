@@ -42,9 +42,7 @@
         <a href="room/new/"><button type="button">Add room</button></a>
 
       </div>
-<!--  {% if error %}-->
-<!--    {{error}}-->
-<!--  {% endif %}-->
+
 <form action="" method="POST">
     {% csrf_token %}
     <br>
@@ -64,9 +62,9 @@
 
     <br>
     <br>
-    <label>Projector: {{room.projector}}</label>
-        <label >Yes</label>
-        <input type="checkbox" name="projector" value="Yes">
+    <label>Projector: </label>
+        <label for="projector" >Yes</label>
+        <input type="checkbox" name="projector" {% if room.projector %} checked {% endif %}>
 
     <br>
         <br>

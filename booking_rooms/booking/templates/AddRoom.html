@@ -40,11 +40,7 @@
 <h1>Room navigation system</h1>
         <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
         <a href="/room/new/"><button type="button">Add room</button></a>
-
       </div>
-<!--  {% if error %}-->
-<!--    {{error}}-->
-<!--  {% endif %}-->
 <form action="" method="POST">
     {% csrf_token %}
     <br>
@@ -60,8 +56,8 @@
     <br>
     <br>
     <label>Projector: </label>
-        <label >Yes</label>
-        <input type="checkbox" name="projector" value="Yes">
+        <label for="projektor">Yes</label>
+        <input type="checkbox" name="projector">
     <br>
         <br>
         <br>

@@ -44,8 +44,6 @@
 
       </div>
 
-<!--<form action="" method="POST">-->
-<!--    {% csrf_token %}-->
 <div class="room">
 
     <br>
@@ -72,11 +70,11 @@
             <td style="color: red">No</td>
             {% endif %}
         <td><a href="/modify-room/{{room.id}}/"><button type="button">Edit</button></a></td>
-        <td><a href="delete-room/{{room.id}}/"><button type="button">Delete</button></a></td>
+        <td><a href="/delete-room/{{room.id}}/"><button type="button">Delete</button></a></td>
         <td><a href="/reserve-room/{{room.id}}/"><button type="button">Reserve</button></a></td>
         </tr>
         {% empty %}
-        <tr><td>No rooms available</td></tr>
+        <label position="center" >No rooms available</label>
         {% endfor %}
       </tbody>
 </table>
