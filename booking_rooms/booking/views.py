@@ -23,12 +23,13 @@ class AddRoomView(View):
         name = request.POST.get('name')
         seats = request.POST.get('seats')
         seats_int = int(seats) if seats else 0
-        projector = request.POST.get('projector')=='on'
+        projector = request.POST.get('projector')
 
-        # if projector == "Yes":
-        #     projector = True
-        # else:
-        #     projector = False
+
+        if projector == "Yes":
+            projector = True
+        else:
+            projector = False
 
         if not name:
             return render(request, 'AddRoom.html', context={'error':'Enter the name of the room'})
@@ -77,12 +78,12 @@ class ModifyView(View):
         name = request.POST.get('name') # downloading new data from the form (from the website)
         seats = request.POST.get('seats')
         seats_int = int(seats) if seats else 0
-        projector = request.POST.get('projector')=='on'
+        projector = request.POST.get('projector')
 # projector availability
-#         if projector == "Yes":
-#             projector = True
-#         else:
-#             projector = False
+        if projector == "Yes":
+            projector = True
+        else:
+            projector = False
 # checking the correctness of the entered data
         if not name:
             return render(request, 'Modify.html', context={'error':'Enter the name of the room'})

@@ -10,7 +10,7 @@
         left: 0;
 		bottom:0;
 		width:100%;
-		height:100px;
+		height:50px;
 		background:gray;
         text-align: center;
 	}
@@ -23,6 +23,7 @@
 		background:gray;
         text-align: center;
     }
+
     td, th { border: 1px solid black; }
 
     .search {
@@ -31,12 +32,13 @@
         bottom: auto;
     }
 
+
 </style>
 
 
 </head>
 <title>Booking of conference rooms</title>
-<body bgcolor="#a9a9a9">
+<body bgcolor="#a9a9a9" class="slice">
 <div class="room">
 <h1>Room navigation system</h1>
         <a href="/show-rooms/"><button type="button">List of all rooms</button></a>
@@ -44,7 +46,7 @@
 
       </div>
 
-<div class="room">
+<div class="room-2" >
 
     <br>
     <br>
@@ -89,8 +91,10 @@
         <input type="text" name="seats"><br>
         <br>
         <label>Projector: </label>
-        <label >Yes</label>
         <input type="checkbox" name="projector" value="Yes">
+        <label for="Yes">Yes</label>
+        <input type="checkbox" name="projector" value="No">
+        <label for="No">No</label>
     <br>
     <br>
     <input type="submit" value="Search"><br>
@@ -100,9 +104,11 @@
     <label position="center" >{{error}}</label>
   {% endif %}
 <!--</form>-->
+    <div class="footer">
 <footer class="footer">
   <span class="text">Jolanta Wiśniewska</span>
 </footer>
+    </div>
 
 </body>
 
