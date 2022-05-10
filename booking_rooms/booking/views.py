@@ -87,8 +87,8 @@ class ModifyView(View):
 # checking the correctness of the entered data
         if not name:
             return render(request, 'Modify.html', context={'error':'Enter the name of the room'})
-        if Rooms.objects.filter(name=name).exists():
-            return render(request, 'Modify.html', context={'error':'That room exist'})
+        # if Rooms.objects.filter(name=name).exists():
+        #     return render(request, 'Modify.html', context={'error':'That room exist'})
         if seats_int <= 0:
             return render(request, 'Modify.html', context={'error':'Enter a number greater than 0'})
         else:
@@ -137,20 +137,25 @@ class SearchView(View):
         name = request.GET.get('name')
         seats = request.GET.get('seats')
         seats_int = int(seats) if seats else 0
-        projector = request.POST.get('projector')=='on'
+        camera = request.GET.get('projector')
 
-        # if projector == "Yes":
-        #     projector = True
+        # if camera == "Yes":
+        #     camera = True
         # else:
-        #     projector = False
+        #     camera = False
 # download all rooms
         rooms = Rooms.objects.all()
-        if projector:
-            rooms = Rooms.objects.filter(projector=True)# filtration
+        if camera is not None:
+            if camera == "Yes":
+                camera = True
+                rooms = rooms.filter(projector=camera)
+            else:
+                camera = False
+                rooms = rooms.filter(projector=camera)# filtration
         if seats:
-            rooms = Rooms.objects.filter(seats__gte=seats_int)# filtration
+            rooms = rooms.filter(seats__gte=seats_int)# filtration
         if name:
-            rooms = Rooms.objects.filter(name=name)# filtration
+            rooms = rooms.filter(name=name)# filtration
 
         for room in rooms:
             reservation_date = [reserve.date for reserve in room.reserve_set.all()]
